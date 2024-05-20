@@ -1,0 +1,59 @@
+version: '3.4'
+
+services:
+  webhook:
+    image: ${DOCKER_REGISTRY-}webhook
+    build:
+      context: .
+      dockerfile: WebHook/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "5001:443"
+      - "5000:80"
+  db_data:
+    image: 'postgres:14-alpine'
+    container_name: jivo_qolio_db
+    hostname: jivo_qolio_db_host
+    command:
+      - postgres
+      - '-c'
+      - log_statement=all
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: jivo_qolio_db
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - 'local_pgdata:/var/lib/postgresql/data'
+    logging:
+      options:
+        max-size: 1m
+        max-file: '3'
+    networks:
+      - jivo-qolio
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - '5555:80'
+    networks:
+      - jivo-qolio
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    restart: unless-stopped
+    volumes:
+      - 'pg_data:/var/lib/pgadmin'
+
+networks:
+  jivo-qolio:
+    external: true
+
+volumes:
+  local_pgdata:
+    driver: local
+  pg_data:
+    driver: local
