@@ -13,18 +13,20 @@ COPY . .
 WORKDIR "/src/WebHook"
 RUN dotnet build "WebHook.csproj" -c Release -o /app/build
 
+# Debugging: List the home directory to check for .dotnet directory
+RUN ls -la /root/
+
+# Debugging: List the .dotnet directory to see what exists
+RUN ls -la /root/.dotnet/
+
 # Publish stage
 FROM build AS publish
 RUN dotnet publish "WebHook.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-# Debugging stage
-FROM build AS debug
-RUN ls -la /root/.dotnet/corefx/cryptography/x509stores/my/
 
 # Final image
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 # Copy the certificate to the final image
-COPY --from=debug /root/.dotnet/corefx/cryptography/x509stores/my/* /root/.dotnet/corefx/cryptography/x509stores/my/
+COPY --from=build /root/.dotnet/corefx/cryptography/x509stores/my/* /root/.dotnet/corefx/cryptography/x509stores/my/
 ENTRYPOINT ["dotnet", "WebHook.dll"]
