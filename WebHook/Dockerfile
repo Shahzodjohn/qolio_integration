@@ -1,3 +1,4 @@
+# Base image for the application
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -15,6 +16,10 @@ RUN dotnet build "WebHook.csproj" -c Release -o /app/build
 # Publish stage
 FROM build AS publish
 RUN dotnet publish "WebHook.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+# Debugging: List the contents of the certificate directory
+FROM build AS debug
+RUN ls -l /root/.dotnet/corefx/cryptography/x509stores/my/
 
 # Final image
 FROM base AS final
