@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>616abb9d-b24d-47a8-8579-e468c0816910</ProjectGuid>
+    <ProjectGuid>31854bba-c276-4cfa-8d2c-6bc6fb4241b4</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>webhook</DockerServiceName>

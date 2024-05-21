@@ -25,7 +25,6 @@ builder.Services.AddSwaggerGen();
 DotNetEnv.Env.Load();
 var connectionString = Environment.GetEnvironmentVariable("CSTR");
 
-
 builder.Services.AddDbContext<AppDbContext>(
     opt => opt.UseNpgsql(connectionString).UseLazyLoadingProxies());
 

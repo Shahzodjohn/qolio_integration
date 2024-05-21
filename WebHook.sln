@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHook", "WebHook\WebHook.csproj", "{4E56C358-3A99-4A44-9C02-16E7E157D8DB}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{616ABB9D-B24D-47A8-8579-E468C0816910}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{31854BBA-C276-4CFA-8D2C-6BC6FB4241B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4E56C358-3A99-4A44-9C02-16E7E157D8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E56C358-3A99-4A44-9C02-16E7E157D8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E56C358-3A99-4A44-9C02-16E7E157D8DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{616ABB9D-B24D-47A8-8579-E468C0816910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{616ABB9D-B24D-47A8-8579-E468C0816910}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{616ABB9D-B24D-47A8-8579-E468C0816910}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{616ABB9D-B24D-47A8-8579-E468C0816910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31854BBA-C276-4CFA-8D2C-6BC6FB4241B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31854BBA-C276-4CFA-8D2C-6BC6FB4241B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31854BBA-C276-4CFA-8D2C-6BC6FB4241B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31854BBA-C276-4CFA-8D2C-6BC6FB4241B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

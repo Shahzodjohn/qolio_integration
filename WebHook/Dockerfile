@@ -1,19 +1,22 @@
-# https://hub.docker.com/_/microsoft-dotnet
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /source
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-# copy csproj and restore as distinct layers
-COPY *.csproj .
-RUN dotnet restore --use-current-runtime
-
-# copy everything else and build app
-COPY . .
-RUN ls -Ra
-RUN dotnet publish -c Release -o /app --use-current-runtime --self-contained false --no-restore
-
-# final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-COPY --from=build /app .
-ENTRYPOINT ["dotnet", "queue.dll"]
+EXPOSE 80
+EXPOSE 443
 
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["WebHook/WebHook.csproj", "WebHook/"]
+RUN dotnet restore "WebHook/WebHook.csproj"
+COPY . .
+WORKDIR "/src/WebHook"
+RUN dotnet build "WebHook.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "WebHook.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "WebHook.dll"]
