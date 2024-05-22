@@ -15,20 +15,15 @@ Log.Logger = new LoggerConfiguration()
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(
-       options =>
-           options.AddPolicy(
-               "UnsecurePolicy",
-               corsPolicyBuilder =>
-               {
-                   corsPolicyBuilder
-                       .AllowAnyHeader()
-                       .AllowAnyMethod()
-                       .SetIsOriginAllowed(_ => true)
-                       .AllowCredentials();
-               }
-           )
-   );
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -47,7 +42,7 @@ builder.Services.AddDbContext<AppDbContext>(
 builder.Services.AddScoped<IServiceInterface, Services>();
 var app = builder.Build();
 
-app.UseCors("UnsecurePolicy");
+app.UseCors("AllowAll");
 
 app.UseStaticFiles();
 
