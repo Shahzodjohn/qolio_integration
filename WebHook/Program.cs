@@ -15,12 +15,28 @@ Log.Logger = new LoggerConfiguration()
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(
+       options =>
+           options.AddPolicy(
+               "UnsecurePolicy",
+               corsPolicyBuilder =>
+               {
+                   corsPolicyBuilder
+                       .AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .SetIsOriginAllowed(_ => true)
+                       .AllowCredentials();
+               }
+           )
+   );
 // Add services to the container.
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
 
 DotNetEnv.Env.Load();
 var connectionString = Environment.GetEnvironmentVariable("CSTR");

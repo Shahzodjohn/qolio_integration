@@ -10,7 +10,7 @@ namespace WebHook.Controllers
     public class WebhookController : ControllerBase
     {
         [HttpGet("get-jivo-data")]
-        public async Task<IActionResult> GetJivoData(JsonElement json)
+        public async Task<IActionResult> GetJivoData()
         {
             Log.Information("New conversation...");
 
