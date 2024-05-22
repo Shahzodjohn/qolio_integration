@@ -42,8 +42,10 @@ builder.Services.AddDbContext<AppDbContext>(
 builder.Services.AddScoped<IServiceInterface, Services>();
 var app = builder.Build();
 
-//app.UseCors("AllowAll");
 app.UseHttpsRedirection();
+app.UseRouting();
+
+app.UseCors("AllowAll"); // Разрешить все запросы CORS
 
 app.UseStaticFiles();
 
