@@ -47,6 +47,8 @@ builder.Services.AddDbContext<AppDbContext>(
 builder.Services.AddScoped<IServiceInterface, Services>();
 var app = builder.Build();
 
+app.UseCors("UnsecurePolicy");
+
 app.UseStaticFiles();
 
 app.MapPost("/webhook", async context =>
