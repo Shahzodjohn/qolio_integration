@@ -6,9 +6,10 @@ using WebHook.interfaces;
 namespace WebHook.Controllers
 {
     [ApiController]
-    [Route("[controller/hook]")]
+    [Route("[controller]")]
     public class WebhookController : ControllerBase
     {
+        [HttpGet("get-jivo-data")]
         public async Task<IActionResult> GetJivoData(JsonElement json)
         {
             Log.Information("New conversation...");
