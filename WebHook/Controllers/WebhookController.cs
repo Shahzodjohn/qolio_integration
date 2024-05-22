@@ -6,7 +6,7 @@ using WebHook.interfaces;
 namespace WebHook.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller/hook]")]
     public class WebhookController : ControllerBase
     {
         public async Task<IActionResult> GetJivoData(JsonElement json)
